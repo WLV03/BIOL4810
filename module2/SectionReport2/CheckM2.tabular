@@ -1,0 +1,2 @@
+Name	Completeness	Contamination	Completeness_Model_Used	Translation_Table_Used	Coding_Density	Contig_N50	Average_Gene_Length	Genome_Size	GC_Content	Total_Coding_Sequences	Total_Contigs	Max_Contig_Length	Additional_Notes
+Filter_FASTA_on_dataset_58__FASTA_sequences	100.0	0.92	Neural Network (Specific Model)	11	0.835	49324	310.2207349720127	4573880	0.47	4109	169	126339	None

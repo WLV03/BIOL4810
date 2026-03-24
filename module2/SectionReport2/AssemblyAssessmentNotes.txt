@@ -1,0 +1,47 @@
+Notes For Assembly and Assessment
+Step 0) 
+Create a new history in galaxy
+
+
+Step 1)
+Upload sequence files to galaxy (Forward and Reverse read). Hit Start 
+
+Step 2)
+Combined the files into a paired list (click on checkbox, select 1 and 2.Pull all 2 selected, and hit auto build list. Scroll down to bottom to give name, and hit build)
+
+Step 3)
+Assessed read quality
+Tool: FastQC
+Version: Galaxt Version 0.74+Galaxy1
+Parameters: Default
+Files downloaded: Forward and Reverse .html files
+
+Step 4)
+Trimmed poor quality reads and adapters
+Tool: Fastp
+Version: Galaxy Version 1.1.0+galaxy0
+Parameters: Paired Collection for read, everything else default
+File Downloaded: fastp report .html
+
+Step 5)
+Assessed read quality of the trimmed reads
+Tool:FastQC
+Version: Galaxy 0.74+galaxy1
+Parameters: Default
+Files downloaded: Forward and reverse .html files
+
+Step 6)
+Assemble the Genome
+Tool: SPAdes
+Version: Galaxy version 4.2.0+galaxy0
+Parameters: Default
+File Assembled: Fastp trimmed output from Step 4
+File Downloaded: contigs file
+
+Step 7)
+Assessed quality
+Tool: Quast
+Version: Galaxy version 5.3.0+galaxy1
+Parameters: Default with PDF output
+File assessed: SPAdes contigs
+File downloaded: PDF report
