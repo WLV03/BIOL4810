@@ -1,0 +1,24 @@
+Transcriptome
+
+The data used in this analysis was acquired from Dr. My Lo Thao's Lab on Plastic Degrading Bacteria. Data includes analysis of Cultured and Plated Promicromonospora.
+
+1) Use Falco
+Version: Galaxy Version 1.2.4+Galaxy0
+Purpose: Faster version of FastQC, Quality Checker for data
+Alterations: None
+Results to Download (RoD): Web Page Plate 3 Data
+2) FastP
+Version: Galaxy Version 1.3.1+Galaxy0
+Purpose: To filter reads. 
+Alterations: none
+RoD: HTML report for Plate 3
+3) HiSat2
+Version: Galaxy Version 2.2.2+Galaxy0
+Purpose: Alignment 
+Alterations: Use a Genome from History for source, and Paired end Dataset Collection on "Is this a single or paired library"
+RoD:Dont download
+4) StringTie
+Version: Galaxy Version 2.2.3+galaxy0
+Purpose: Short Reads turned into transcripts
+Alterations: none
+RoD:
