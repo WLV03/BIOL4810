@@ -22,3 +22,44 @@ Version: Galaxy Version 2.2.3+galaxy0
 Purpose: Short Reads turned into transcripts
 Alterations: none
 RoD:
+5) Stringtie Merge
+Version: Galaxy Version 2.2.3+Galaxy0
+Purpose: Merges transcripts
+Alterations: None
+RoD: None
+6) GffCompare
+Version: Galaxy Version 0.12.0+galaxy0
+Purpose: Compares transcripts 
+Alterations: add .Gff given prior to the Newly acquired data from Step 5
+RoD: none
+7) FeatureCounts
+Version: Galaxy Version 2.1.1+galaxy0
+Purpose: Measures the gene expression
+Alterations: Does the input have read pairs, change to Yes/Count them as 1 single fragment
+
+8) Stringtie
+Version:
+Purpose: 
+Alterations: Added reference genome from our history, Promicromonospora.gff
+
+9) StringTie Merge
+Version:
+Purpose:
+Alterations:
+
+10)Featurecounts
+Alterations: Transcript_id for gff, Yes paired end and count them as 1 for does input have read pairs
+
+11) Stringtie Merge
+
+12) Feature Counts
+
+13)Deseq2
+
+14)Filter
+c7<0.5 first time
+abs(c3)>1 for second time
+
+15) Create Header
+
+16) Merge Header with Filtered Column
