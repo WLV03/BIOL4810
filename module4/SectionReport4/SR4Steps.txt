@@ -1,0 +1,167 @@
+1) Use Falco
+Version: Galaxy Version 1.2.4+Galaxy0
+Purpose: Faster version of FastQC, Quality Checker for data
+Alterations: None
+Results to Download (RoD): Web Page Plate 3 Data
+2) FastP
+Version: Galaxy Version 1.3.1+Galaxy0
+Purpose: To filter reads. 
+Alterations: none
+RoD: HTML report for Plate 3
+3) HiSat2
+Version: Galaxy Version 2.2.2+Galaxy0
+Purpose: Alignment 
+Alterations: Use a Genome from History for source, and Paired end Dataset Collection on "Is this a single or paired library"
+RoD:Dont download
+4) StringTie
+Version: Galaxy Version 2.2.3+galaxy0
+Purpose: Short Reads turned into transcripts
+Alterations: none
+RoD:
+5) Stringtie Merge
+Version: Galaxy Version 2.2.3+Galaxy0
+Purpose: Merges transcripts
+Alterations: None
+RoD: None
+Step 6)
+Tool: GffCompare
+Version: Galaxy v0.12.10 + galaxy 0
+Purpose: Compares Transcripts
+Parameters: Default
+Notes:
+Step 7)
+Tool: featureCounts
+Version: Galaxy v2.1.1 + galaxy 0
+Purpose: Figure out how many times the transcript occurs by sample
+Parameters: Does input have read pairs? -> Yes, paired-ed single fragment. GFF Gene Identifier: transcript_id
+Note: Job 195, 196. Done last week, we left off right here.
+
+Step 8)
+Tool: StringTie
+Version: Galaxy v2.2.3 + galaxy 0
+Purpose: Run stringtie AGAIN, but this time change some parameters.
+Parameters: HISAT 2 input short mapped reads, reference GTF/GFF3 x
+
+Step 9)
+Tool: StringTie Merge
+Version: Galaxy v2.2.3 + galaxy 0
+Purpose: Run StringTie merge
+Parameters: Default
+Notes: merge all the files into one x
+
+Step 10)
+Tool: featureCounts
+Version: Galaxy v2.1.1 + galaxy 0
+Purpose:Figure out how many times each transcript occurs per sample
+Parameters: Does input have read pairs?: Yes, paired-ed single fragment. GFF gene identifier: transcript_id x
+
+Step 11)
+Tool: StringTie Merge
+Version: Galaxy v2.2.3 + galaxy 0
+Purpose: Run String Tie MERGE AGAIN 
+Parameters: Default
+Notes: merge all the files into one. 
+Output: StringTie merge on dataset x
+
+Step 12)
+Tool: featureCounts
+Version: Galaxy v2.1.1 + galaxy 0
+Purpose: Run featureCounts AGAIN 
+Parameters: Does input have read pairs?: Yes, paired-ed single fragment. GFF gene identifier: transcript_id x
+
+Step 13)
+Tool: DESeq2
+Version: 2.11.40.8 + galaxy2
+Purpose: Compare the growth media and see the activity of a gene (up-regulated/down-regulated)
+Parameters: Advanced -> Use beta priors -> yes, Select a factor name -> Growth_Varience, 1: Factor Level -> Mutant, 2: Factor Level -> Wildtype, Output Options -> Output normalized counts
+Files downloaded: plot pdf file
+Notes: Check the results of the plot. Plate replicates cluster. Whatever variables, PC1 accounts for 88% of the variance. 
+
+Step 14)
+Tool: Filter 
+Version: Galaxy v1.1.1
+Purpose:Filter the data
+Parameters: With following condition: c7<0.05
+
+Step 15)
+Notes: We are only interested in rows where P-value is less than 0.05 (significant)
+Tool: Filter 
+Version: Galaxy v1.1.1
+Purpose: Filter the data again, lower fold chain (below 1)
+Parameters: With following condition: abs(c3)>1
+
+Step 16)
+Make a header
+Upload the following as a tabular file: GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-Value	P-adj
+
+Step 17)
+Tool: Concatenate multiple datasets or collections
+Version: Galaxy Version 1.0.0
+Purpose:Concatenate the filtered table and the header together
+Parameters: insert dataset: latest filtered
+
+Step 18)
+Use volcano plot
+Tool: Volcano Plot
+Version: Galaxy Version 4.0.3+galaxy0
+Parameters: FDR Column 7, P Value column 6, Log Fold Change column 3, Labels column 1
+
+Step 19)
+Open the Differential Gene Expression tabular in Excel. Sort by log2(FC)
+
+At this point we should have 7 files in our folder. *
+
+Step 20)
+Upload up10down10 
+Run join two datasets
+Column 1
+Keep header lines
+Notes: Check the columns (there should be two or three new ones added)
+We need normalized counts to generate a heat map
+
+Step 21)
+Tool: Cut
+Version: Galaxy v1.0.2
+Purpose: Cut colomuns from a table
+Parameters: Cut c8-c14
+
+Step 22)
+Tool: heatmap2
+Version: Galaxy v3.3.0 + galaxy 0
+Parameters: Data transformation: Log2(value+1) transform my data, type of color map: whatever you want
+Input: Cut 
+
+Step 23)
+Tool: Filter data on any column . . . 
+Version: v1.1.1
+Parameters: c3=="CDS"
+Input: 2:Burkholderia.gff
+
+Step 24)
+Tool: Cut
+Version: v1.0.2
+Parameters: c9
+Input: Cut columns: c9
+
+Step 25)
+Tool: Convert delimiters to TAB
+Version: v1.0.1
+Purpose: Modifies columns that are not seen.
+Parameters: Convert all: Semicolons x
+
+Step 26)
+Tool: Replace Text
+Version: v9.5 + galaxy3
+Purpose: Take out 'Parent=' from columns
+Parameters: In column 2, Find pattern: "Parent="
+
+Step 27) 
+Tool: Cut
+Version: v1.0.2
+Purpose: We only want two columns from the GFF now
+Parameters: cut columns -> c2,c8
+
+Step 28)
+Tool: Join two Datasets
+Version: v2.1.3
+Parameters: using column: 1 for both. Keep header lines -> yes

@@ -1,0 +1,14 @@
+Deseq Results:
+We use Deseq to differentiate the genes between our two groups.
+Wildtype and Mutants are segregated and in their own groupings. Mutant 1 and 3 show high significance in differentiation. 
+
+Volcano Results: 
+We use this step to see the differentiation between genes of both groups based on down regulation or up regulation
+Upregulated Genes show some significance, however Downregulated Genes show the most significance in the sample genome
+
+Heatmap Results:
+We use this to see specifically which genes belong to which two groupings.
+Genes seem to be differentiated amongst the Mutant and Wildtypes, Genes 25870 to 25850 are only found in the Wildtypes while Genes 01185 to 04385 are found in the mutants only.
+
+Gene ID+Gene Process results:
+Up regulated Gene 01185 which is a Mutant works in the gene as a tryptophan isonitrite synthase protein, while a down regulated gene 25865 belonging to a Wildtype makes spore coats. We can see that Wildtypes seem to have spore coats that get upregulated while Mutants somehow lost all their spore coat functions.
